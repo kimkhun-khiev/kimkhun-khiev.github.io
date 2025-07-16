@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimkhun Khiev - Senior R&D Manager Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- html2pdf.js for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" xintegrity="sha512-GsIDXPiSPcpIvRydPNgSFuzh6NGd85JD7bGUbxaT4GdVjA3+eJ5eLkp2wz9j0/Q3F3T+eL4Q6J7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Dark blue-gray background */
+            color: #e2e8f0; /* Light gray text */
+            line-height: 1.6;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            color: #cbd5e1; /* Lighter gray for titles */
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(to right, #6366f1, #8b5cf6); /* Purple gradient underline */
+            border-radius: 9999px;
+        }
+        .card {
+            background-color: #1e293b; /* Slightly lighter dark blue-gray for cards */
+            border-radius: 1rem; /* More rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(to right, #6366f1, #8b5cf6); /* Purple gradient button */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid #6366f1; /* Purple border */
+            color: #6366f1; /* Purple text */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #6366f1;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .skill-icon {
+            font-size: 2.5rem; /* Larger icons */
+            color: #8b5cf6; /* Purple color for icons */
+            transition: color 0.3s ease;
+        }
+        .skill-item:hover .skill-icon {
+            color: #a78bfa; /* Lighter purple on hover */
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #8b5cf6; /* Purple on hover */
+        }
+        /* Styles for the loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .spinner {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #6366f1; /* Blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header/Navigation -->
+    <header class="bg-slate-900 shadow-lg py-4 px-6 md:px-12 fixed w-full z-50">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-extrabold text-white">Kimkhun Khiev</a>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#about" class="text-slate-300 nav-link">About</a></li>
+                <li><a href="#skills" class="text-slate-300 nav-link">Skills</a></li>
+                <li><a href="#projects" class="text-slate-300 nav-link">Projects</a></li>
+                <li><a href="#experience" class="text-slate-300 nav-link">Experience</a></li>
+                <li><a href="#education" class="text-slate-300 nav-link">Education</a></li>
+                <li><a href="#contact" class="text-slate-300 nav-link">Contact</a></li>
+            </ul>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-slate-300 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-slate-900 bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-8">
+            <button id="close-mobile-menu" class="absolute top-6 right-6 text-slate-300 focus:outline-none">
+                <i class="fas fa-times text-3xl"></i>
+            </button>
+            <ul class="text-3xl space-y-8 text-center">
+                <li><a href="#about" class="text-slate-300 nav-link" onclick="toggleMobileMenu()">About</a></li>
+                <li><a href="#skills" class="text-slate-300 nav-link" onclick="toggleMobileMenu()">Skills</a></li>
+                <li><a href="#projects" class="text-slate-300 nav-link" onclick="toggleMobileMenu()">Projects</a></li>
+                <li><a href="#experience" class="text-slate-300 nav-link" onclick="toggleMobileMenu()">Experience</a></li>
+                <li><a href="#education" class="text-slate-300 nav-link" onclick="toggleMobileMenu()">Education</a></li>
+                <li><a href="#contact" class="text-slate-300 nav-link" onclick="toggleMobileMenu()">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section id="hero" class="relative bg-gradient-to-br from-slate-900 to-indigo-900 text-white py-24 md:py-32 flex items-center justify-center min-h-screen-75">
+            <div class="container mx-auto px-6 text-center z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-up">
+                    Hello, I'm <span class="text-purple-400">Kimkhun Khiev</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-300 mb-8 animate-fade-in-up delay-200">
+                    Senior R&D Manager | Driving Innovation in AI, ML, LLM & Blockchain
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-in-up delay-400">
+                    <a href="#projects" class="btn-primary inline-block">
+                        View My Work <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <!-- Updated button to trigger PDF generation -->
+                    <button onclick="generateCvPdf()" class="btn-secondary inline-block">
+                        Download My CV <i class="fas fa-download ml-2"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Background elements for visual appeal -->
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob top-1/4 left-1/4"></div>
+                <div class="absolute w-64 h-64 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000 top-1/2 right-1/4"></div>
+                <div class="absolute w-64 h-64 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000 bottom-1/4 left-1/2"></div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-16 md:py-24 bg-slate-800">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl md:text-4xl section-title text-center mx-auto mb-12">About Me</h2>
+                <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                    <div class="md:w-1/3 mb-8 md:mb-0">
+                        <img src="https://scontent.fpnh24-1.fna.fbcdn.net/v/t39.30808-6/496294965_24183563414562083_6350231695319868237_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeFsdyoC2Rbp8g1cCh3MFOZhPuE0nX0mW24-4TSdfSZbbokylSYQK1y9ckUzmCgKIIFLnA3uUeWzqVbYEJvlff4n&_nc_ohc=iiXIaXa1QpoQ7kNvwHzARvI&_nc_oc=AdnQDytDNz2c3bsFhzAAKnvtQlmXRHcfLIoSkA_zAXoo_Cs7rdhuNA0usDsjrxkPBAM&_nc_zt=23&_nc_ht=scontent.fpnh24-1.fna&_nc_gid=gyNB47F74hPCjEwQhp4SKg&oh=00_AfQm1US2aUsuRlXVMwX7ResK50WiyIJYNWaAnrsgoRbqFw&oe=687A9D60" alt="Kimkhun Khiev Photo" class="w-full h-auto rounded-full shadow-lg border-4 border-purple-500 object-cover">
+                    </div>
+                    <div class="md:w-2/3 text-lg text-slate-300">
+                        <p class="mb-4">
+                            As a <strong class="text-white">Senior Research and Development Manager</strong>, I lead high-performing teams in pioneering cutting-edge technologies. My passion lies in transforming complex challenges into innovative, scalable solutions that drive business growth and technological advancement.
+                        </p>
+                        <p class="mb-4">
+                            With extensive experience across the full spectrum of software development, from <strong class="text-white">Full Stack Web</strong> applications to robust <strong class="text-white">Backend Systems</strong> and intuitive <strong class="text-white">Frontend Experiences</strong>, I bring a holistic perspective to product development.
+                        </p>
+                        <p>
+                            My core expertise is deeply rooted in <strong class="text-white">Artificial Intelligence (AI)</strong>, <strong class="text-white">Machine Learning (ML)</strong>, and <strong class="text-white">Large Language Models (LLMs)</strong>, where I've successfully deployed intelligent systems that redefine user interaction and data analysis. Complementing this, I have a strong background in <strong class="text-white">Blockchain technology</strong>, exploring its potential for secure and decentralized applications. I am committed to fostering a culture of continuous learning and innovation within my teams.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-16 md:py-24 bg-slate-900">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl section-title text-center mx-auto mb-12">My Expertise</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    <!-- AI & ML Core -->
+                    <div class="card p-6 text-center skill-item">
+                        <i class="fas fa-brain skill-icon mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">AI & Machine Learning</h3>
+                        <p class="text-slate-400">Deep Learning, Predictive Modeling, Data Science, TensorFlow, Scikit-learn</p>
+                    </div>
+                    <!-- LLM & NLP -->
+                    <div class="card p-6 text-center skill-item">
+                        <i class="fas fa-comments skill-icon mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">LLM & Natural Language Processing</h3>
+                        <p class="text-slate-400">Khmer LLM, Prompt Engineering, Fine-tuning, Generative AI, NLP</p>
+                    </div>
+                    <!-- Computer Vision & OCR -->
+                    <div class="card p-6 text-center skill-item">
+                        <i class="fas fa-eye skill-icon mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Computer Vision & OCR</h3>
+                        <p class="text-slate-400">Khmer OCR, Image Processing, Face Recognition, Object Detection</p>
+                    </div>
+                    <!-- Speech Technologies -->
+                    <div class="card p-6 text-center skill-item">
+                        <i class="fas fa-microphone-alt skill-icon mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Speech AI</h3>
+                        <p class="text-slate-400">Khmer TTS/STT, Voice Identification, Audio Processing, Speech Recognition</p>
+                    </div>
+                    <!-- Biometrics & Security -->
+                    <div class="card p-6 text-center skill-item">
+                        <i class="fas fa-fingerprint skill-icon mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Biometrics & Security</h3>
+                        <p class="text-slate-400">Face ID, Face Pass, Face Blacklist, Voice ID, Authentication Systems</p>
+                    </div>
+                    <!-- Blockchain -->
+                    <div class="card p-6 text-center skill-item">
+                        <i class="fas fa-link skill-icon mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Blockchain Technology</h3>
+                        <p class="text-slate-400">Smart Contracts, Decentralized Applications (DApps), Solidity</p>
+                    </div>
+                    <!-- Backend Development -->
+                    <div class="card p-6 text-center skill-item">
+                        <i class="fas fa-server skill-icon mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Backend Development</h3>
+                        <p class="text-slate-400">Node.js, Python (Django/Flask), C#, ASP.Net, MVC.Net, SQL/NoSQL Databases</p>
+                    </div>
+                    <!-- Frontend Development -->
+                    <div class="card p-6 text-center skill-item">
+                        <i class="fas fa-laptop-code skill-icon mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Frontend Development</h3>
+                        <p class="text-slate-400">React, Vue.js, HTML5, CSS3, JavaScript, Responsive Design</p>
+                    </div>
+                    <!-- Mobile & Cross-Platform -->
+                    <div class="card p-6 text-center skill-item">
+                        <i class="fas fa-mobile-alt skill-icon mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Mobile Development</h3>
+                        <p class="text-slate-400">React Native, Cross-platform Solutions, Mobile UI/UX</p>
+                    </div>
+                    <!-- Enterprise Solutions -->
+                    <div class="card p-6 text-center skill-item">
+                        <i class="fas fa-building skill-icon mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Enterprise Solutions</h3>
+                        <p class="text-slate-400">ERP Systems, POS Systems, Inventory Management</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-16 md:py-24 bg-slate-800">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl section-title text-center mx-auto mb-12">Featured Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1: Khmer LLM -->
+                    <div class="card overflow-hidden">
+                        <img src="https://placehold.co/600x400/8b5cf6/ffffff?text=Khmer+LLM" alt="Khmer LLM Project" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-white">Khmer Large Language Model (K-LLM)</h3>
+                            <p class="text-slate-300 mb-4">
+                                Spearheaded the research and development of a custom Large Language Model specifically trained for the Khmer language, enabling advanced natural language understanding and generation capabilities.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">LLM</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Khmer NLP</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Deep Learning</span>
+                            </div>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium">
+                                Learn More <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Khmer TTS/STT -->
+                    <div class="card overflow-hidden">
+                        <img src="https://placehold.co/600x400/6366f1/ffffff?text=Khmer+TTS+STT" alt="Khmer TTS STT Project" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-white">Khmer Text-to-Speech & Speech-to-Text</h3>
+                            <p class="text-slate-300 mb-4">
+                                Developed robust Text-to-Speech (TTS) and Speech-to-Text (STT) systems for Khmer, achieving high accuracy and natural-sounding synthesis for various applications.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Speech AI</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Machine Learning</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Audio Processing</span>
+                            </div>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium">
+                                Learn More <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Khmer OCR -->
+                    <div class="card overflow-hidden">
+                        <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Khmer+OCR" alt="Khmer OCR Project" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-white">Khmer Optical Character Recognition (OCR)</h3>
+                            <p class="text-slate-300 mb-4">
+                                Designed and implemented a highly accurate OCR solution for Khmer script, enabling efficient digitization and processing of documents and images.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Computer Vision</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">OCR</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Image Processing</span>
+                            </div>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium">
+                                Learn More <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Voice ID -->
+                    <div class="card overflow-hidden">
+                        <img src="https://placehold.co/600x400/8b5cf6/ffffff?text=Voice+ID" alt="Voice ID Project" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-white">Secure Voice Identification System</h3>
+                            <p class="text-slate-300 mb-4">
+                                Developed a biometric voice identification system for authentication and security applications, utilizing advanced audio feature extraction and machine learning algorithms.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Biometrics</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Voice Recognition</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Security</span>
+                            </div>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium">
+                                Learn More <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: Face Library (Face Pass, Face ID, Face Blacklist) -->
+                    <div class="card overflow-hidden">
+                        <img src="https://placehold.co/600x400/6366f1/ffffff?text=Face+Library" alt="Face Library Project" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-white">Comprehensive Face Recognition Suite</h3>
+                            <p class="text-slate-300 mb-4">
+                                Built a complete facial recognition platform encompassing Face Pass for access control, Face ID for user authentication, and Face Blacklist for security monitoring.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Face Recognition</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Computer Vision</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Biometrics</span>
+                            </div>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium">
+                                Learn More <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: Advanced AI Chatbot Platform (retained from previous) -->
+                    <div class="card overflow-hidden">
+                        <img src="https://placehold.co/600x400/a78bfa/ffffff?text=AI+Chatbot+Platform" alt="AI Chatbot Platform" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold mb-2 text-white">Advanced AI Chatbot Platform</h3>
+                            <p class="text-slate-300 mb-4">
+                                Led the development of an enterprise-grade AI chatbot platform leveraging custom LLMs for natural language understanding and generation, significantly improving customer support efficiency.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">LLM</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">NLP</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">Python</span>
+                                <span class="bg-purple-700 text-white text-xs px-3 py-1 rounded-full">TensorFlow</span>
+                            </div>
+                            <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium">
+                                Learn More <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-16 md:py-24 bg-slate-900">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl md:text-4xl section-title text-center mx-auto mb-12">Professional Experience</h2>
+                <div class="space-y-8">
+                    <!-- Job 1: Senior Research and Development Manager - Wing Bank Plc -->
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-semibold text-white">Senior Research and Development Manager</h3>
+                        <p class="text-purple-400 text-lg mb-2">Wing Bank Plc | 2024 - Present</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Leading R&D efforts in Artificial Intelligence (AI), Machine Learning (ML), and Khmer Large Language Models (LLM).</li>
+                            <li>Driving innovation and strategic direction for advanced technological solutions.</li>
+                        </ul>
+                    </div>
+                    <!-- Job 2: Research and Development Manager - Wing Bank Plc -->
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-semibold text-white">Research and Development Manager</h3>
+                        <p class="text-purple-400 text-lg mb-2">Wing Bank Plc | 2022 - 2024</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Managed various R&D projects with a focus on emerging technologies, including Blockchain.</li>
+                            <li>Contributed to the development of innovative financial technology solutions.</li>
+                        </ul>
+                    </div>
+                    <!-- Job 3: CTO - A1Career Inc. -->
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-semibold text-white">Chief Technology Officer (CTO)</h3>
+                        <p class="text-purple-400 text-lg mb-2">A1Career Inc. | 2019 - 2022</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Oversaw all technological aspects and strategic direction of the company.</li>
+                            <li>Led product development and managed engineering teams.</li>
+                        </ul>
+                    </div>
+                    <!-- Job 4: Research and Development Manager - ATech Group Co., LTD. -->
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-semibold text-white">Research and Development Manager</h3>
+                        <p class="text-purple-400 text-lg mb-2">ATech Group Co., LTD. | 2015 - 2019</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Managed R&D for Enterprise Resource Planning (ERP) and Point of Sale (POS) systems.</li>
+                            <li>Focused on developing robust and scalable business software solutions.</li>
+                        </ul>
+                    </div>
+                    <!-- Job 5: Software Solution Manager - M2K Corp. -->
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-semibold text-white">Software Solution Manager</h3>
+                        <p class="text-purple-400 text-lg mb-2">M2K Corp. | 2015 - 2018</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Managed software solutions for POS, Inventory, and Mini Mart systems.</li>
+                            <li>Utilized skills in C#, ASP.Net, and MVC.Net for development and team leadership.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section (New on Website) -->
+        <section id="education" class="py-16 md:py-24 bg-slate-800">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl md:text-4xl section-title text-center mx-auto mb-12">Education</h2>
+                <div class="space-y-8">
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-semibold text-white">Master of Information Technology and Engineering</h3>
+                        <p class="text-purple-400 text-lg mb-2">Royal University of Phnom Penh | 2012 - 2015</p>
+                        <p class="text-slate-300">
+                            Focused on advanced computing concepts, software engineering methodologies, and emerging technologies, deepening expertise in IT infrastructure and system design.
+                        </p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-semibold text-white">Science and Business Management</h3>
+                        <p class="text-purple-400 text-lg mb-2">University of Management Economics | 2008 - 2012</p>
+                        <p class="text-slate-300">
+                            Gained a comprehensive understanding of scientific principles combined with core business administration, economics, and management strategies.
+                        </p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-semibold text-white">Computer Science and Engineering</h3>
+                        <p class="text-purple-400 text-lg mb-2">Royal University of Phnom Penh | 2000 - 2004</p>
+                        <p class="text-slate-300">
+                            Developed foundational knowledge in computer science, including algorithms, data structures, programming languages, and hardware-software interaction.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-24 bg-slate-900">
+            <div class="container mx-auto px-6 max-w-2xl">
+                <h2 class="text-3xl md:text-4xl section-title text-center mx-auto mb-12">Get In Touch</h2>
+                <p class="text-center text-lg text-slate-300 mb-8">
+                    I'm always open to discussing new projects, innovative ideas, or opportunities to contribute to your vision.
+                </p>
+                <form class="space-y-6 card p-8">
+                    <div>
+                        <label for="name" class="block text-slate-200 text-sm font-bold mb-2">Name</label>
+                        <input type="text" id="name" name="name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 bg-slate-700 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Your Name">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-slate-200 text-sm font-bold mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="shadow appearance-none border rounded-lg w-full py-3 px-4 bg-slate-700 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="your.email@example.com">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-slate-200 text-sm font-bold mb-2">Message</label>
+                        <textarea id="message" name="message" rows="6" class="shadow appearance-none border rounded-lg w-full py-3 px-4 bg-slate-700 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Your message..."></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn-primary">
+                            Send Message <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="text-center mt-8 text-slate-400">
+                    <p>Or connect with me on:</p>
+                    <div class="flex justify-center space-x-6 mt-4">
+                        <a href="https://www.linkedin.com/in/khiev-kimkhun?utm_source=share" target="_blank" class="text-slate-300 hover:text-purple-400 text-3xl transition-colors duration-300">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/kimkhun-khiev" target="_blank" class="text-slate-300 hover:text-purple-400 text-3xl transition-colors duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:khun.malinhka@live.com" class="text-slate-300 hover:text-purple-400 text-3xl transition-colors duration-300">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-8 text-center text-slate-400">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2024 Kimkhun Khiev. All rights reserved.</p>
+            <p class="text-sm mt-2">Built with <span class="text-red-500">&hearts;</span> and Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay HTML -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Generating CV PDF...</p>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        closeMobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when a link is clicked (for smooth scrolling)
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+        // Function to generate CV PDF
+        function generateCvPdf() {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.classList.remove('hidden'); // Show loading overlay
+
+            // Create a temporary div to hold the content for the PDF
+            const pdfContent = document.createElement('div');
+            pdfContent.style.padding = '20px'; // Add some padding for better PDF layout
+            pdfContent.style.fontFamily = 'Inter, sans-serif';
+            pdfContent.style.color = '#1e293b'; // Darker text for PDF readability
+            pdfContent.style.fontSize = '10px'; // Base font size for PDF to fit more content
+
+            // --- CV Header ---
+            const cvHeader = document.createElement('div');
+            cvHeader.style.textAlign = 'center';
+            cvHeader.style.marginBottom = '20px';
+            cvHeader.style.borderBottom = '1px solid #e0e0e0';
+            cvHeader.style.paddingBottom = '15px';
+
+            const profileImg = document.createElement('img');
+            profileImg.src = "https://scontent.fpnh24-1.fna.fbcdn.net/v/t39.30808-6/496294965_24183563414562083_6350231695319868237_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeFsdyoC2Rbp8g1cCh3MFOZhPuE0nX0mW24-4TSdfSZbbokylSYQK1y9ckUzmCgKIIFLnA3uUeWzqVbYEJvlff4n&_nc_ohc=iiXIaXa1QpoQ7kNvwHzARvI&_nc_oc=AdnQDytDNz2c3bsFhzAAKnvtQlmXRHcfLIoSkA_zAXoo_Cs7rdhuNA0usDsjrxkPBAM&_nc_zt=23&_nc_ht=scontent.fpnh24-1.fna&_nc_gid=gyNB47F74hPCjEwQhp4SKg&oh=00_AfQm1US2aUsuRlXVMwX7ResK50WiyIJYNWaAnrsgoRbqFw&oe=687A9D60"; // Your profile image URL
+            profileImg.style.width = '80px';
+            profileImg.style.height = '80px';
+            profileImg.style.borderRadius = '50%';
+            profileImg.style.objectFit = 'cover';
+            profileImg.style.margin = '0 auto 10px auto';
+            profileImg.style.border = '2px solid #6366f1';
+            cvHeader.appendChild(profileImg);
+
+            const name = document.createElement('h1');
+            name.textContent = 'Kimkhun Khiev';
+            name.style.fontSize = '22px';
+            name.style.fontWeight = 'bold';
+            name.style.color = '#1e293b';
+            name.style.marginBottom = '5px';
+            cvHeader.appendChild(name);
+
+            const title = document.createElement('p');
+            title.textContent = 'Senior R&D Manager | AI, ML, LLM & Blockchain Expert';
+            title.style.fontSize = '14px';
+            title.style.color = '#475569';
+            cvHeader.appendChild(title);
+
+            const contactInfo = document.createElement('p');
+            contactInfo.style.fontSize = '10px';
+            contactInfo.style.color = '#475569';
+            contactInfo.innerHTML = 'Email: khun.malinhka@live.com | LinkedIn: linkedin.com/in/khiev-kimkhun | GitHub: github.com/kimkhun-khiev'; // Updated with actual links
+            cvHeader.appendChild(contactInfo);
+            pdfContent.appendChild(cvHeader);
+
+            // Helper function to create a section title for PDF
+            function createPdfSectionTitle(text) {
+                const titleDiv = document.createElement('div');
+                titleDiv.style.marginBottom = '10px';
+                titleDiv.style.marginTop = '15px';
+                titleDiv.style.pageBreakAfter = 'avoid'; // Keep title with next content
+
+                const h2 = document.createElement('h2');
+                h2.textContent = text;
+                h2.style.fontSize = '16px';
+                h2.style.fontWeight = 'bold';
+                h2.style.color = '#1e293b';
+                h2.style.borderBottom = '2px solid #6366f1';
+                h2.style.paddingBottom = '5px';
+                h2.style.marginBottom = '5px';
+                titleDiv.appendChild(h2);
+                return titleDiv;
+            }
+
+            // --- About Me Section ---
+            pdfContent.appendChild(createPdfSectionTitle('About Me'));
+            const aboutP1 = document.createElement('p');
+            aboutP1.textContent = 'As a Senior Research and Development Manager, I lead high-performing teams in pioneering cutting-edge technologies. My passion lies in transforming complex challenges into innovative, scalable solutions that drive business growth and technological advancement.';
+            aboutP1.style.marginBottom = '5px';
+            aboutP1.style.color = '#1e293b';
+            pdfContent.appendChild(aboutP1);
+
+            const aboutP2 = document.createElement('p');
+            aboutP2.textContent = 'With extensive experience across the full spectrum of software development, from Full Stack Web applications to robust Backend Systems and intuitive Frontend Experiences, I bring a holistic perspective to product development.';
+            aboutP2.style.marginBottom = '5px';
+            aboutP2.style.color = '#1e293b';
+            pdfContent.appendChild(aboutP2);
+
+            const aboutP3 = document.createElement('p');
+            aboutP3.textContent = 'My core expertise is deeply rooted in Artificial Intelligence (AI), Machine Learning (ML), and Large Language Models (LLMs), where I\'ve successfully deployed intelligent systems that redefine user interaction and data analysis. Complementing this, I have a strong background in Blockchain technology, exploring its potential for secure and decentralized applications. I am committed to fostering a culture of continuous learning and innovation within my teams.';
+            aboutP3.style.color = '#1e293b';
+            pdfContent.appendChild(aboutP3);
+
+
+            // --- Skills Section ---
+            pdfContent.appendChild(createPdfSectionTitle('My Expertise'));
+            const skillsData = [
+                { title: 'AI & Machine Learning', description: 'Deep Learning, Predictive Modeling, Data Science, TensorFlow, Scikit-learn' },
+                { title: 'LLM & Natural Language Processing', description: 'Khmer LLM, Prompt Engineering, Fine-tuning, Generative AI, NLP' },
+                { title: 'Computer Vision & OCR', description: 'Khmer OCR, Image Processing, Face Recognition, Object Detection' },
+                { title: 'Speech AI', description: 'Khmer TTS/STT, Voice Identification, Audio Processing, Speech Recognition' },
+                { title: 'Biometrics & Security', description: 'Face ID, Face Pass, Face Blacklist, Voice ID, Authentication Systems' },
+                { title: 'Blockchain Technology', description: 'Smart Contracts, Decentralized Applications (DApps), Solidity' },
+                { title: 'Backend Development', description: 'Node.js, Python (Django/Flask), C#, ASP.Net, MVC.Net, SQL/NoSQL Databases' },
+                { title: 'Frontend Development', description: 'React, Vue.js, HTML5, CSS3, JavaScript, Responsive Design' },
+                { title: 'Mobile Development', description: 'React Native, Cross-platform Solutions, Mobile UI/UX' },
+                { title: 'Enterprise Solutions', description: 'ERP Systems, POS Systems, Inventory Management' }
+            ];
+
+            const skillsGrid = document.createElement('div');
+            skillsGrid.style.display = 'grid';
+            skillsGrid.style.gridTemplateColumns = 'repeat(2, 1fr)'; // Two columns
+            skillsGrid.style.gap = '10px';
+            skillsGrid.style.marginBottom = '15px';
+
+            skillsData.forEach(skill => {
+                const skillItem = document.createElement('div');
+                skillItem.style.backgroundColor = '#f1f5f9';
+                skillItem.style.border = '1px solid #cbd5e1';
+                skillItem.style.borderRadius = '5px';
+                skillItem.style.padding = '8px';
+                skillItem.style.pageBreakInside = 'avoid'; // Prevent breaking inside skill item
+
+                const skillTitle = document.createElement('h3');
+                skillTitle.textContent = skill.title;
+                skillTitle.style.fontSize = '12px';
+                skillTitle.style.fontWeight = '600';
+                skillTitle.style.color = '#1e293b';
+                skillItem.appendChild(skillTitle);
+
+                const skillDesc = document.createElement('p');
+                skillDesc.textContent = skill.description;
+                skillDesc.style.fontSize = '9px';
+                skillDesc.style.color = '#475569';
+                skillItem.appendChild(skillDesc);
+                skillsGrid.appendChild(skillItem);
+            });
+            pdfContent.appendChild(skillsGrid);
+
+            // --- Professional Experience Section ---
+            pdfContent.appendChild(createPdfSectionTitle('Professional Experience'));
+            const experienceData = [
+                {
+                    title: 'Senior Research and Development Manager', company: 'Wing Bank Plc', years: '2024 - Present',
+                    duties: ['Leading R&D efforts in Artificial Intelligence (AI), Machine Learning (ML), and Khmer Large Language Models (LLM).', 'Driving innovation and strategic direction for advanced technological solutions.']
+                },
+                {
+                    title: 'Research and Development Manager', company: 'Wing Bank Plc', years: '2022 - 2024',
+                    duties: ['Managed various R&D projects with a focus on emerging technologies, including Blockchain.', 'Contributed to the development of innovative financial technology solutions.']
+                },
+                {
+                    title: 'Chief Technology Officer (CTO)', company: 'A1Career Inc.', years: '2019 - 2022',
+                    duties: ['Oversaw all technological aspects and strategic direction of the company.', 'Led product development and managed engineering teams.']
+                },
+                {
+                    title: 'Research and Development Manager', company: 'ATech Group Co., LTD.', years: '2015 - 2019',
+                    duties: ['Managed R&D for Enterprise Resource Planning (ERP) and Point of Sale (POS) systems.', 'Focused on developing robust and scalable business software solutions.']
+                },
+                {
+                    title: 'Software Solution Manager', company: 'M2K Corp.', years: '2015 - 2018',
+                    duties: ['Managed software solutions for POS, Inventory, and Mini Mart systems.', 'Utilized skills in C#, ASP.Net, and MVC.Net for development and team leadership.']
+                }
+            ];
+
+            experienceData.forEach(job => {
+                const jobDiv = document.createElement('div');
+                jobDiv.style.backgroundColor = '#f1f5f9';
+                jobDiv.style.border = '1px solid #cbd5e1';
+                jobDiv.style.borderRadius = '5px';
+                jobDiv.style.padding = '10px';
+                jobDiv.style.marginBottom = '10px';
+                jobDiv.style.pageBreakInside = 'avoid'; // Prevent breaking inside job entry
+
+                const jobTitle = document.createElement('h3');
+                jobTitle.textContent = job.title;
+                jobTitle.style.fontSize = '14px';
+                jobTitle.style.fontWeight = '600';
+                jobTitle.style.color = '#1e293b';
+                jobDiv.appendChild(jobTitle);
+
+                const jobCompanyYears = document.createElement('p');
+                jobCompanyYears.textContent = `${job.company} | ${job.years}`;
+                jobCompanyYears.style.fontSize = '11px';
+                jobCompanyYears.style.color = '#6366f1'; // Purple for company/years
+                jobCompanyYears.style.marginBottom = '5px';
+                jobDiv.appendChild(jobCompanyYears);
+
+                const dutiesList = document.createElement('ul');
+                dutiesList.style.listStyleType = 'disc';
+                dutiesList.style.marginLeft = '15px';
+                job.duties.forEach(duty => {
+                    const li = document.createElement('li');
+                    li.textContent = duty;
+                    li.style.fontSize = '10px';
+                    li.style.color = '#475569';
+                    dutiesList.appendChild(li);
+                });
+                jobDiv.appendChild(dutiesList);
+                pdfContent.appendChild(jobDiv);
+            });
+
+            // --- Education Section ---
+            pdfContent.appendChild(createPdfSectionTitle('Education'));
+            const educationData = [
+                {
+                    degree: 'Master of Information Technology and Engineering',
+                    institution: 'Royal University of Phnom Penh',
+                    years: '2012 - 2015',
+                    summary: 'Focused on advanced computing concepts, software engineering methodologies, and emerging technologies, deepening expertise in IT infrastructure and system design.'
+                },
+                {
+                    degree: 'Science and Business Management',
+                    institution: 'University of Management Economics',
+                    years: '2008 - 2012',
+                    summary: 'Gained a comprehensive understanding of scientific principles combined with core business administration, economics, and management strategies.'
+                },
+                {
+                    degree: 'Computer Science and Engineering',
+                    institution: 'Royal University of Phnom Penh',
+                    years: '2000 - 2004',
+                    summary: 'Developed foundational knowledge in computer science, including algorithms, data structures, programming languages, and hardware-software interaction.'
+                }
+            ];
+
+            educationData.forEach(edu => {
+                const eduDiv = document.createElement('div');
+                eduDiv.style.backgroundColor = '#f1f5f9';
+                eduDiv.style.border = '1px solid #cbd5e1';
+                eduDiv.style.borderRadius = '5px';
+                eduDiv.style.padding = '10px';
+                eduDiv.style.marginBottom = '10px';
+                eduDiv.style.pageBreakInside = 'avoid'; // Prevent breaking inside education entry
+
+                const eduDegree = document.createElement('h3');
+                eduDegree.textContent = edu.degree;
+                eduDegree.style.fontSize = '14px';
+                eduDegree.style.fontWeight = '600';
+                eduDegree.style.color = '#1e293b';
+                eduDiv.appendChild(eduDegree);
+
+                const eduInstitutionYears = document.createElement('p');
+                eduInstitutionYears.textContent = `${edu.institution} | ${edu.years}`;
+                eduInstitutionYears.style.fontSize = '11px';
+                eduInstitutionYears.style.color = '#6366f1'; // Purple for institution/years
+                eduInstitutionYears.style.marginBottom = '5px';
+                eduDiv.appendChild(eduInstitutionYears);
+
+                const eduSummary = document.createElement('p');
+                eduSummary.textContent = edu.summary;
+                eduSummary.style.fontSize = '10px';
+                eduSummary.style.color = '#475569';
+                eduDiv.appendChild(eduSummary);
+                pdfContent.appendChild(eduDiv);
+            });
+
+            // --- Featured Projects Section ---
+            pdfContent.appendChild(createPdfSectionTitle('Featured Projects'));
+            const projectsData = [
+                {
+                    title: 'Khmer Large Language Model (K-LLM)',
+                    img: 'https://placehold.co/600x100/8b5cf6/ffffff?text=Khmer+LLM', // Smaller placeholder image
+                    description: 'Spearheaded the research and development of a custom Large Language Model specifically trained for the Khmer language, enabling advanced natural language understanding and generation capabilities.',
+                    tags: ['LLM', 'Khmer NLP', 'Deep Learning']
+                },
+                {
+                    title: 'Khmer Text-to-Speech & Speech-to-Text',
+                    img: 'https://placehold.co/600x100/6366f1/ffffff?text=Khmer+TTS+STT',
+                    description: 'Developed robust Text-to-Speech (TTS) and Speech-to-Text (STT) systems for Khmer, achieving high accuracy and natural-sounding synthesis for various applications.',
+                    tags: ['Speech AI', 'Machine Learning', 'Audio Processing']
+                },
+                {
+                    title: 'Khmer Optical Character Recognition (OCR)',
+                    img: 'https://placehold.co/600x100/a78bfa/ffffff?text=Khmer+OCR',
+                    description: 'Designed and implemented a highly accurate OCR solution for Khmer script, enabling efficient digitization and processing of documents and images.',
+                    tags: ['Computer Vision', 'OCR', 'Image Processing']
+                },
+                {
+                    title: 'Secure Voice Identification System',
+                    img: 'https://placehold.co/600x100/8b5cf6/ffffff?text=Voice+ID',
+                    description: 'Developed a biometric voice identification system for authentication and security applications, utilizing advanced audio feature extraction and machine learning algorithms.',
+                    tags: ['Biometrics', 'Voice Recognition', 'Security']
+                },
+                {
+                    title: 'Comprehensive Face Recognition Suite',
+                    img: 'https://placehold.co/600x100/6366f1/ffffff?text=Face+Library',
+                    description: 'Built a complete facial recognition platform encompassing Face Pass for access control, Face ID for user authentication, and Face Blacklist for security monitoring.',
+                    tags: ['Face Recognition', 'Computer Vision', 'Biometrics']
+                },
+                {
+                    title: 'Advanced AI Chatbot Platform',
+                    img: 'https://placehold.co/600x100/a78bfa/ffffff?text=AI+Chatbot+Platform',
+                    description: 'Led the development of an enterprise-grade AI chatbot platform leveraging custom LLMs for natural language understanding and generation, significantly improving customer support efficiency.',
+                    tags: ['LLM', 'NLP', 'Python', 'TensorFlow']
+                }
+            ];
+
+            projectsData.forEach(project => {
+                const projectDiv = document.createElement('div');
+                projectDiv.style.backgroundColor = '#f1f5f9';
+                projectDiv.style.border = '1px solid #cbd5e1';
+                projectDiv.style.borderRadius = '5px';
+                projectDiv.style.padding = '10px';
+                projectDiv.style.marginBottom = '10px';
+                projectDiv.style.pageBreakInside = 'avoid'; // Prevent breaking inside project entry
+
+                const projectImg = document.createElement('img');
+                projectImg.src = project.img;
+                projectImg.style.width = '100%';
+                projectImg.style.height = '80px'; // Consistent small height for PDF
+                projectImg.style.objectFit = 'cover';
+                projectImg.style.marginBottom = '8px';
+                projectDiv.appendChild(projectImg);
+
+                const projectTitle = document.createElement('h3');
+                projectTitle.textContent = project.title;
+                projectTitle.style.fontSize = '14px';
+                projectTitle.style.fontWeight = '600';
+                projectTitle.style.color = '#1e293b';
+                projectTitle.style.marginBottom = '5px';
+                projectDiv.appendChild(projectTitle);
+
+                const projectDesc = document.createElement('p');
+                projectDesc.textContent = project.description;
+                projectDesc.style.fontSize = '10px';
+                projectDesc.style.color = '#475569';
+                projectDesc.style.marginBottom = '8px';
+                projectDiv.appendChild(projectDesc);
+
+                const tagsDiv = document.createElement('div');
+                tagsDiv.style.display = 'flex';
+                tagsDiv.style.flexWrap = 'wrap';
+                tagsDiv.style.gap = '5px';
+                project.tags.forEach(tag => {
+                    const span = document.createElement('span');
+                    span.textContent = tag;
+                    span.style.backgroundColor = '#e0b0ff';
+                    span.style.color = '#1e293b';
+                    span.style.fontSize = '8px';
+                    span.style.padding = '2px 6px';
+                    span.style.borderRadius = '5px';
+                    tagsDiv.appendChild(span);
+                });
+                projectDiv.appendChild(tagsDiv);
+                pdfContent.appendChild(projectDiv);
+            });
+
+
+            // PDF options
+            const options = {
+                margin: 10,
+                filename: 'Kimkhun_Khiev_CV.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: 'avoid-all' } // Attempt to avoid all page breaks inside elements
+            };
+
+            // Generate the PDF
+            html2pdf().from(pdfContent).set(options).save().then(() => {
+                loadingOverlay.classList.add('hidden'); // Hide loading overlay after PDF is generated
+            });
+        }
+    </script>
+</body>
+</html>
